@@ -1,4 +1,5 @@
 var plane;
+var enemy;
 var system;
 var d1;
 var d2;
@@ -25,13 +26,20 @@ function preload() {
 	img4 = loadImage("assets/cloud4.png");
 	img5 = loadImage("assets/cloud5.png");
 	images = [img1, img2, img3, img4, img5];
+  img6 = loadImage("assets/enemyPlane.png")
 }
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // Create object
   x = width;
   y = height/ 2;
   plane = new Plane(); 
+
+  enemy = createSprite(200, 200);
+  enemy.addAnimation("normal", "assets/enemyPlane.png");
+  enemy.addAnimation("explode", "assets/explode1.png", "assets/explode2.png", "assets/explode3.png", "assets/explode4.png", "assets/explode5.png", "assets/explode6.png");
+  
   system = new ParticleSystem(createVector(width/3.75,y));
   cloud1 = new Cloud();
   cloud2 = new Cloud();
@@ -45,6 +53,7 @@ function setup() {
   random2 = getRandomImage(images);
   noCursor();
 }
+
 function draw() {
   background('#66ccff');
   cloud1.move();
@@ -65,6 +74,18 @@ function draw() {
   plane.display();
   system.addParticle();
   system.run();
+
+
+  //collision detection for enemy planes
+ if(enemy.overlap(bullet))
+    enemy.changeAnimation("explode");
+  else
+    enemy.changeAnimation("normal");
+  
+  enemy.collide(box);
+  
+  drawSprites();
+
 }
   // Plane class
 function Plane() {
@@ -81,7 +102,46 @@ function Plane() {
     image(img, this.x, this.y, this.diameter, this.diameter/2);
   };
 }
-// Cloud class
+
+
+  //Enemy Plane Class
+
+function enemy() {
+ this.x = random(width);
+ this.y = random(height);
+ this.speed = (12);
+ this.random2 = getRandomImage(images);
+ 
+ this.move = function() { 
+   if(this.x < -500) {
+   this.x = width + random(width/10, width/4);
+   this.y = random(height);
+ }
+ else {
+   this.x = this.x - this.speed;
+ }
+  
+   this.y = this.y;
+ };
+ 
+ this.display = function() {
+    if(this.x < -500) {
+
+    image(img, this.x, this.y, this.diameter, this.diameter/2);
+
+    this.image = ("assets/enemyPlane.png");
+   image("assets/enemyPlane.png", this.x, this.y, this.diameter, this.diameter/2);
+    }
+    else {
+    image("assets/enemyPlane.png", this.x, this.y, this.diameter, this.diameter/2);
+    }
+ };
+ 
+}
+ 
+
+
+  // Cloud class
 function Cloud() {
   this.x = random(width);
   this.y = random(height);
