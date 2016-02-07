@@ -43,11 +43,10 @@ function setup() {
   angle = 0;
   angle2 = 0;
   random2 = getRandomImage(images);
+  noCursor();
 }
 function draw() {
   background('#66ccff');
-  plane.move();
-  plane.display();
   cloud1.move();
   cloud1.display();
   cloud2.move();
@@ -74,7 +73,7 @@ function Plane() {
   this.diameter = width / 10;
   this.speed = 1;
   this.move = function() {
-  d1 = height/3 + (sin(angle) * this.y/8);
+  d1 = mouseY + (sin(angle) * this.y/8);
   this.y = d1;
   angle += 0.02;
   };
@@ -153,7 +152,7 @@ var ParticleSystem = function(position) {
   this.particles = [];
 };
 ParticleSystem.prototype.addParticle = function() {
-  d2 = height/2.7 + (sin(angle) * this.origin.y/8);
+  d2 = mouseY + height/30 + (sin(angle) * this.origin.y/8);
   this.origin.y = d2;
   angle2 += 0.02;
   this.particles.push(new Particle(this.origin));
@@ -173,3 +172,4 @@ function getRandomImage(array) {
     var img = array[num];
     return img;
 }
+
