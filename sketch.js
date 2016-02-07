@@ -16,6 +16,8 @@ var x;
 var y;
 var images;
 var random2;
+var missiles;
+var missileImg;
 
 function preload() {
 	img = loadImage("assets/plane.png");
@@ -25,6 +27,7 @@ function preload() {
 	img4 = loadImage("assets/cloud4.png");
 	img5 = loadImage("assets/cloud5.png");
 	images = [img1, img2, img3, img4, img5];
+	missileImg = loadImage("assets/missile.png");
 }
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -44,6 +47,7 @@ function setup() {
   angle2 = 0;
   random2 = getRandomImage(images);
   noCursor();
+  missiles = new Group();
 }
 function draw() {
   background('#66ccff');
@@ -65,6 +69,16 @@ function draw() {
   plane.display();
   system.addParticle();
   system.run();
+  if (mouseIsPressed) {
+	if (mouseButton == LEFT) {
+		var missile=createSprite(mouseX,mouseY,5,5);
+		missile.addImage(missileImg);
+		missile.setSpeed(10);
+		missile.life = 30;
+		missiles.add(missile);
+	}
+  }
+  drawSprites();
 }
   // Plane class
 function Plane() {
