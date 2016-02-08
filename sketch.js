@@ -58,7 +58,7 @@ function setup() {
   noCursor();
   missiles = new Group();
   enemies = new Group();
-  for (var i = 0; i<4; i++) {
+  for (var i = 0; i<6; i++) {
 	var px = random(width,width*2);
 	var py = random(height);
 	createEnemy(px,py);
