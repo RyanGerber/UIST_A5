@@ -7,7 +7,7 @@ var x,y;
 var images;
 var random2;
 var missiles, enemies;
-var song, bang;
+var song, bang, boom;
 var color1, color2; 
 var Y_AXIS = 1;
 
@@ -21,6 +21,7 @@ function preload() {
   images = [img1, img2, img3, img4, img5];
   img6 = loadImage("assets/enemyPlane.png");
   missileImg = loadImage("assets/missile.png");
+  soundFormats('mp3');
   song = loadSound('assets/8bit_get_lucky.mp3');
 }
 
@@ -56,9 +57,9 @@ function setup() {
 **/
 
   //Adding in MP3 for gun shot
-  soundFormats('mp3');
-  bang = loadSound('assets/bang.mp3');
 
+  bang = loadSound('assets/bang.mp3');
+  boom = loadSound('assets/boom.mp3');
 
   angle = 0;
   angle2 = 0;
@@ -66,7 +67,7 @@ function setup() {
   noCursor();
   missiles = new Group();
   enemies = new Group();
-  for (var i = 0; i<8; i++) {
+  for (var i = 0; i<4; i++) {
 	var px = random(width,width*2);
 	var py = random(height);
 	createEnemy(px,py);
@@ -315,8 +316,9 @@ function setGradient(x, y, w, h, c1, c2, axis) {
 
 function enemyHit(enemy,missile) {
 	enemy.changeAnimation("explode");
+	boom.play();
 	missile.remove();
-	enemy.life=10;
+	enemy.life=5;
 }
 
 function  planeHit(plane,enemy) {
