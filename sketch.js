@@ -7,7 +7,7 @@ var x,y;
 var images;
 var random2;
 var missiles, enemies;
-var bang;
+var song, bang;
 var color1, color2; 
 var Y_AXIS = 1;
 
@@ -21,9 +21,11 @@ function preload() {
   images = [img1, img2, img3, img4, img5];
   img6 = loadImage("assets/enemyPlane.png");
   missileImg = loadImage("assets/missile.png");
+  song = loadSound('assets/8bit_get_lucky.mp3');
 }
 
-function setup() {
+function setup() { 
+  song.play();
   createCanvas(windowWidth, windowHeight);
   // Create object
   x = width;
@@ -43,7 +45,6 @@ function setup() {
   cloud4 = new Cloud();
   cloud5 = new Cloud();
   cloud6 = new Cloud();
-  cloud7 = new Cloud();
   
 /**
     //I think the sprite generator goes here based off
@@ -320,17 +321,19 @@ function enemyHit(enemy,missile) {
 
 function  planeHit(plane,enemy) {
 	plane.remove();
-	textSize(60);
+	textSize(45);
 	fill('#ff0000');
 	text("GAME OVER", width/2, height/2-30); 
 	text("PRESS SHIFT TO CONTINUE", width/2, height/2+30); 
 	noLoop();
 	cursor(ARROW);
+	song.stop();
 }
 
 function keyPressed() {
 	if(keyCode == SHIFT) {
 		loop();
 		noCursor();
+		song.play();
 	}
 }
