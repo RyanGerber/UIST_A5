@@ -32,7 +32,7 @@ function setup() {
   color1 = color('#66ccff');
   color2 = color('#c29aca');
   plane = createSprite(width/5,height/2);
-  plane.setCollider("circle",0,0,100);
+  plane.setCollider("circle",0,0,plane.height);
   plane.addImage(img);
   plane.scale=0.2;
   
@@ -306,7 +306,7 @@ function setGradient(x, y, w, h, c1, c2, axis) {
 	a.addImage(img6);
 	a.setSpeed(10, random(165,195));
 	a.scale=0.2;
-	a.setCollider("circle",0,0,100);
+	a.setCollider("circle",0,0,a.width);
 	enemies.add(a);
 	return a;
 }
