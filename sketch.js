@@ -47,15 +47,6 @@ function setup() {
   cloud5 = new Cloud();
   cloud6 = new Cloud();
   
-/**
-    //I think the sprite generator goes here based off
-    //the example in the p5js example, but I could be wrong-
-    //http://p5play.molleindustria.org/examples/index.html?fileName=collisions.js#/assets
-  enemy = createSprite(200, 200);
-  enemy.addAnimation("normal", "assets/enemyPlane.png");
-  enemy.addAnimation("explode", "assets/explode1.png", "assets/explode2.png", "assets/explode3.png", "assets/explode4.png", "assets/explode5.png", "assets/explode6.png");
-**/
-
   //Adding in MP3 for gun shot
 
   bang = loadSound('assets/bang.mp3');
@@ -118,76 +109,11 @@ function draw() {
 	missile.scale=0.25;
     missile.life = 30;
     missiles.add(missile);
-    //This should add the 'bang' sound to missile fire
-    //Source = http://p5js.org/examples/examples/Sound_Sound_Effect.php
     bang.play();
   }
   
   drawSprites();
-
-//Collision detection for enemy planes- make sure this variable "missile" is correct
- /**if(enemy.overlap(missile))
-    enemy.changeAnimation("explode");
-  else
-    enemy.changeAnimation("normal");
-  
-	enemy.collide(box);
-  
- drawSprites();
-**/
-
-
 }
-
-  // Plane class
-/** function Plane() {
-  this.x = width/ 5;
-  this.y = height/ 2;
-  this.diameter = width / 10;
-  this.speed = 1;
-  this.move = function() {
-  d1 = mouseY + (sin(angle) * this.y/8);
-  this.y = d1;
-  angle += 0;
-  };
-  this.display = function() {
-    image(img, this.x, this.y, this.diameter, this.diameter/2);
-  };
-}
-**/
-
- //Enemy Plane Class- I think there's mistakes here... 
-
-/**function enemy() {
-  this.x = random(width);
-  this.y = random(height);
-  this.speed = (12);
-  this.random2 = getRandomImage(images);
- 
-  this.move = function() { 
-   if(this.x < -500) {
-   this.x = width + random(width/10, width/4);
-   this.y = random(height);
-  }
-  else {
-   this.x = this.x - this.speed;
-  }
-  
-   this.y = this.y;
-  };
- 
-  this.display = function() {
-    if(this.x < -500) {
-    image("assets/enemyPlane.png", this.x, this.y, this.diameter, this.diameter/2);
-    this.image = ("assets/enemyPlane.png");
-    }
-    else {
-    image("assets/enemyPlane.png", this.x, this.y, this.diameter, this.diameter/2);
-    }
- };
- 
-}
-**/
 
 // Cloud class
 function Cloud() {
