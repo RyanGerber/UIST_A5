@@ -303,7 +303,8 @@ function setGradient(x, y, w, h, c1, c2, axis) {
 
  function createEnemy(x,y) {
 	var a=createSprite(x,y);
-	a.addImage(img6);
+	a.addAnimation("normal", "assets/enemyPlane.png");
+	a.addAnimation("explode", "assets/explode1.png", "assets/explode2.png", "assets/explode3.png", "assets/explode4.png", "assets/explode5.png", "assets/explode6.png");
 	a.setSpeed(10, random(165,195));
 	a.scale=0.2;
 	a.setCollider("circle",0,0,a.width);
@@ -312,15 +313,24 @@ function setGradient(x, y, w, h, c1, c2, axis) {
 }
 
 function enemyHit(enemy,missile) {
+	enemy.changeAnimation("explode");
 	missile.remove();
-	enemy.remove();
+	enemy.life=10;
 }
 
 function  planeHit(plane,enemy) {
 	plane.remove();
-	textSize(84);
+	textSize(60);
 	fill('#ff0000');
-	text("GAME OVER", width/2, height/2); 
+	text("GAME OVER", width/2, height/2-30); 
+	text("PRESS SHIFT TO CONTINUE", width/2, height/2+30); 
 	noLoop();
 	cursor(ARROW);
+}
+
+function keyPressed() {
+	if(keyCode == SHIFT) {
+		loop();
+		noCursor();
+	}
 }
