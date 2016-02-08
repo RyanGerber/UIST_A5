@@ -1,4 +1,5 @@
 var plane;
+var enemy;
 var system;
 var d1;
 var d2;
@@ -16,21 +17,32 @@ var x;
 var y;
 var images;
 var random2;
+var missiles;
+var missileImg;
+var bang;
+var color1, color2; 
+var Y_AXIS = 1;
 
 function preload() {
-	img = loadImage("assets/plane.png");
-	img1 = loadImage("assets/cloud1.png");
-	img2 = loadImage("assets/cloud2.png");
-	img3 = loadImage("assets/cloud3.png");
-	img4 = loadImage("assets/cloud4.png");
-	img5 = loadImage("assets/cloud5.png");
-	images = [img1, img2, img3, img4, img5];
+  img = loadImage("assets/plane.png");
+  img1 = loadImage("assets/cloud1.png");
+  img2 = loadImage("assets/cloud2.png");
+  img3 = loadImage("assets/cloud3.png");
+  img4 = loadImage("assets/cloud4.png");
+  img5 = loadImage("assets/cloud5.png");
+  images = [img1, img2, img3, img4, img5];
+  img6 = loadImage("assets/enemyPlane.png");
+  missileImg = loadImage("assets/missile.png");
 }
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // Create object
   x = width;
   y = height/ 2;
+  //Background gradient colors
+  color1 = color('#66ccff');
+  color2 = color('#c29aca');
   plane = new Plane(); 
   system = new ParticleSystem(createVector(width/3.75,y));
   cloud1 = new Cloud();
@@ -40,13 +52,30 @@ function setup() {
   cloud5 = new Cloud();
   cloud6 = new Cloud();
   cloud7 = new Cloud();
+
+    //I think the sprite generator goes here based off
+    //the example in the p5js example, but I could be wrong-
+    //http://p5play.molleindustria.org/examples/index.html?fileName=collisions.js#/assets
+  enemy = createSprite(200, 200);
+  enemy.addAnimation("normal", "assets/enemyPlane.png");
+  enemy.addAnimation("explode", "assets/explode1.png", "assets/explode2.png", "assets/explode3.png", "assets/explode4.png", "assets/explode5.png", "assets/explode6.png");
+
+  //Adding in MP3 for gun shot
+  soundFormats('mp3');
+  bang = loadSound('assets/bang.mp3');
+
   angle = 0;
   angle2 = 0;
   random2 = getRandomImage(images);
   noCursor();
+  missiles = new Group();
 }
+
+
 function draw() {
-  background('#66ccff');
+  // Old Sky color- background('#66ccff');
+  //New gradient background below, source here- http://p5js.org/examples/examples/Color_Linear_Gradient.php
+  setGradient(0, 0, width, height, color1, color2, Y_AXIS);
   cloud1.move();
   cloud1.display();
   cloud2.move();
@@ -65,7 +94,37 @@ function draw() {
   plane.display();
   system.addParticle();
   system.run();
+ 
+  if (mouseIsPressed) {
+  if (mouseButton == LEFT) {
+    var missile=createSprite(mouseX,mouseY,5,5);
+    missile.addImage(missileImg);
+    missile.setSpeed(20);
+    missile.life = 30;
+    missiles.add(missile);
+    //This should add the 'bang' sound to missile fire
+    //Source = http://p5js.org/examples/examples/Sound_Sound_Effect.php
+    bang.play();
+  }
+  }
+  drawSprites();
 }
+
+
+
+  //Collision detection for enemy planes- make sure this variable "missile" is correct
+ if(enemy.overlap(missile))
+    enemy.changeAnimation("explode");
+  else
+    enemy.changeAnimation("normal");
+  
+  enemy.collide(box);
+  
+  drawSprites();
+
+}
+
+
   // Plane class
 function Plane() {
   this.x = width/ 5;
@@ -81,6 +140,39 @@ function Plane() {
     image(img, this.x, this.y, this.diameter, this.diameter/2);
   };
 }
+
+ //Enemy Plane Class- I think there's mistakes here... 
+
+function enemy() {
+  this.x = random(width);
+  this.y = random(height);
+  this.speed = (12);
+  this.random2 = getRandomImage(images);
+ 
+  this.move = function() { 
+   if(this.x < -500) {
+   this.x = width + random(width/10, width/4);
+   this.y = random(height);
+  }
+  else {
+   this.x = this.x - this.speed;
+  }
+  
+   this.y = this.y;
+  };
+ 
+  this.display = function() {
+    if(this.x < -500) {
+    image("assets/enemyPlane.png", this.x, this.y, this.diameter, this.diameter/2);
+    this.image = ("assets/enemyPlane.png");
+    }
+    else {
+    image("assets/enemyPlane.png", this.x, this.y, this.diameter, this.diameter/2);
+    }
+ };
+ 
+}
+
 // Cloud class
 function Cloud() {
   this.x = random(width);
@@ -102,13 +194,13 @@ function Cloud() {
   };
   
   this.display = function() {
-	if(this.x < -1000) {
-	this.random2 = getRandomImage(images);
+  if(this.x < -1000) {
+  this.random2 = getRandomImage(images);
     image(this.random2, this.x, this.y, this.diameter, this.diameter/2);
-	}
-	else {
-	image(this.random2, this.x, this.y, this.diameter, this.diameter/2);
-	}
+  }
+  else {
+  image(this.random2, this.x, this.y, this.diameter, this.diameter/2);
+  }
   };
   
 }
