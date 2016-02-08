@@ -52,11 +52,12 @@ function setup() {
   enemy = createSprite(200, 200);
   enemy.addAnimation("normal", "assets/enemyPlane.png");
   enemy.addAnimation("explode", "assets/explode1.png", "assets/explode2.png", "assets/explode3.png", "assets/explode4.png", "assets/explode5.png", "assets/explode6.png");
+**/
 
   //Adding in MP3 for gun shot
   soundFormats('mp3');
   bang = loadSound('assets/bang.mp3');
-**/
+
 
   angle = 0;
   angle2 = 0;
@@ -117,7 +118,7 @@ function draw() {
     missiles.add(missile);
     //This should add the 'bang' sound to missile fire
     //Source = http://p5js.org/examples/examples/Sound_Sound_Effect.php
-    //bang.play();
+    bang.play();
   }
   
   drawSprites();
