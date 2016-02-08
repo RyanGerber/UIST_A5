@@ -249,6 +249,7 @@ function enemyHit(enemy,missile) {
 
 function  planeHit(plane,enemy) {
 	plane.remove();
+	boom.play();
 	textSize(45);
 	fill('#ff0000');
 	text("GAME OVER", width/2, height/2-30); 

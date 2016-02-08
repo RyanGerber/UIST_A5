@@ -1,4 +1,4 @@
-Exercise 5: Readme
+﻿Exercise 5: Readme
 
 User Interface Software, Winter - 2016
 Christopher Chung (cc733@uw.edu) 
@@ -8,7 +8,7 @@ Ryan Gerber (ryan1105@uw.edu)
 
 Title:
 
-The Neverending Fight
+The Neverending Flight
 
 
 
@@ -44,7 +44,7 @@ Things to work on in the future:
 
 As fun as this simple flyer is, one can’t help but think of ways to improve upon the model. Some other areas, given more time, we would love to include are things like tilting and easing as the pilot dips and dives around the screen, as well as some leeway within the X axis for the plane to move. Without a more complicated easing rigged up this was a bit too choppy for the current game. Also, improving bounding boxes for our simple collision engine here would go a long ways towards making the impacts more dangerous. The interaction between enemies and the hero too could be improved, allowing them to shoot and swarm the pilot, as well as better crafting the pilot’s guns to be more smooth and restricted in fire power. 
 
-In the end, however, The Never-ending Flight is a simple, fun and lightweight game for all to enjoy. We had fun making it, and we home you have as much fun playing!
+In the end, however, The Neverending Flight is a simple, fun and lightweight game for all to enjoy. We had fun making it, and we home you have as much fun playing!
 
 -Ryan & Chris 
 
