@@ -12,7 +12,6 @@ The Neverending Fight
 
 
 
-<<<<<<< HEAD
 Description:
 
 This piece was inspired by the dogfights that would often be experienced during World War II between fighters in the sky. The maniacal and slightly suicidal hero faces off against an army of enemy fighters, who are intent on taking him down. The hero only has the ability to move in the y-axis since his tailwing is broken, but can shoot an infinite supply of missiles to take down the enemies. The enemies are randomly spawned, and travel randomly selected angles between 165 to 205 degrees from right to left. There is a nice parallax between the clouds and enemies flying from right to left, which gives the piece a 3d effect with foreground and background. Finally, 8bit background music was added to the piece, to give it a retro feel, in line with the time period.
@@ -34,7 +33,6 @@ Finally, we worked separately to fine tune the operations of the experience, Rya
 Work Breakdown (From Chris):
 
 First, we brainstormed and took notes on paper regarding what user input we would like to add, and how it would affect the user's interaction with the piece. We both liked the idea of a shootemups having played them before, so we decided to add enemy planes, missiles, and collision to our piece. Similar to last week, we both started coding to get familiar with P5.js as wel as P5.play.js which has a lot of animation functions useful for games such as shootemups. This time, we used Github so that we could branch and merge are code, as well as rollback if anything breaks. 
->>>>>>> origin/master
 
 After creating the sprites for the enemy plane, we split up our work. Chris worked on coding the collision function and randomizing the enemy planes' spawn location. Ryan worked on creating the visual artifacts, which were the enemy plane's natural state, and a image sequence of the enemy plane exploding. Once we got the enemy plane spawning correctly on the screen, we moved onto the missiles and collision. Ryan worked on getting the missile function working, as it was very similar to the enemy plane function, as they both use several of thes ame Sprite properties. Chris worked on getting the collision working for both the enemy planes and missiles, as well as the hero's plane and enemy planes. 
 
@@ -49,6 +47,8 @@ As fun as this simple flyer is, one can’t help but think of ways to improve up
 In the end, however, The Never-ending Flight is a simple, fun and lightweight game for all to enjoy. We had fun making it, and we home you have as much fun playing!
 
 -Ryan & Chris 
+
+
 
 Documentation
 http://p5js.org/reference/
